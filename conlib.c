@@ -41,6 +41,13 @@ void bigandlow (Conjunto c1, Conjunto c2, Conjunto *big, Conjunto *low) {
 Conjunto *cn_union (Conjunto c1, Conjunto c2, Conjunto *p_cRes){
   Conjunto auxC, *bigC, *lowC;
   
+  // limpiamos la variable donde alojaremos el resultado
+  if(p_cRes) {
+    free(p_cRes);
+  }
+  p_cRes = (Conjunto *) malloc(sizeof(Conjunto));
+  
+  // si alguno es nulo devolvemos a el que no sea nulo
   if(!c1.p_elements){
     cn_copy(c2, p_cRes);
     return p_cRes; 
