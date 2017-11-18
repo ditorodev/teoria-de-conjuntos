@@ -40,7 +40,8 @@ void bigandlow (Conjunto c1, Conjunto c2, Conjunto *big, Conjunto *low) {
 
 Conjunto *cn_union (Conjunto c1, Conjunto c2, Conjunto *p_cRes){
   Conjunto auxC, *bigC, *lowC;
-  
+  int i, j, flag = 0, cont = 0;
+
   // limpiamos la variable donde alojaremos el resultado
   if(p_cRes) {
     free(p_cRes);
@@ -56,7 +57,37 @@ Conjunto *cn_union (Conjunto c1, Conjunto c2, Conjunto *p_cRes){
     cn_copy(c1, p_cRes);
     return p_cRes; 
   }
-  
+ 
   bigandlow(c1, c2, bigC, lowC);
+  for(i=0; i<lowC->size; i++) {
+    for(j=0; i<bigC->size; j++) {
+      if(lowC.p_element[i] == bigC.p_elements[j]) {
+        cont++;
+        break;
+      }
+    }
+  }
+  p_cRes->size = bigC->size + lowC->size - cont;
+  cont = 0;
+  p_cRes->p_elements = (int *) malloc(sizeof(int) * p_cRes->size);
+  // anadimos todos los elementos del conjunto mas grande
+  for (i = 0; i<bigC->size; i++) p_cRes->p_elements[cont++] = bigC->p_elements[i];
+  // ahora anadimos los del conjunto menor que no se encuentre en el conjunto mas grande
+  for(i=0; i<lowC->size; i++) {
+   flag = 0;
+   j = 0;
+   // verificamos que el elemento de este conjunto no este presente en el otro
+    while(!flag &&  j<bigC->size) {
+      if(lowC->p_elements[i] == bigC->p_elements[j++]) flag = 1;
+    }
+  // si este elemento no se encuentra en el otro conjunto procedemos a anadirlo al conjunto resultante
+  if(!flag) p_cRes->p_elements[cont++] = lowC->p_elements[i];
+  }
+  
+  strcpy(p_cRes->name, "Union de ");
+  strcat(p_cRes->name, c1.name);
+  strcat(p_cRes->name, " y ");
+  strcat(p_cRes->name, c2.name);
+
   return p_cRes;
 }
