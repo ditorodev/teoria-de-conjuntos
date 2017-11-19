@@ -28,18 +28,6 @@ void imprimirConjunto(Conjunto *c, Elemento *universo) {
     if (i<(c->size-1)) printf(" - ");
   }
 }
-  
-/*void bigandlow (Conjunto *c1, Conjunto *c2, Conjunto *big, Conjunto *low) {
-  if(c1->size > c2->size) {
-    big = c1;
-    low = c2;  
-    return;
-  }
-  
-  big = c2;
-  low = c1;
-  //printf("big %s and low %s", big->name, low->name);
-}*/
 
 Conjunto *cn_union (Conjunto c1, Conjunto c2, Conjunto *p_cRes){
   Conjunto *bigC, *lowC;
