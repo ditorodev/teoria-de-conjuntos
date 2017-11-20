@@ -20,8 +20,7 @@ Conjunto * cn_copy(Conjunto src, Conjunto *dest) {
 }
 
 void imprimirConjunto(Conjunto *c, Elemento *universo) {
-  int i = 0;
-  
+  int i = 0; 
   printf("\n%i .- %s(%i) : ", c->value, c->name, c->size);
   for (i =0; i<c->size; i++) {
     printf("%s", universo[c->p_elements[i]].name);
